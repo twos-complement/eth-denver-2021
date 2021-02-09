@@ -31,6 +31,10 @@ const withIdx = WrappedComponent => {
       setup()
     }, [])
 
+    if (!idx) {
+      return <h1>Loading IDX...</h1>
+    }
+
     return (
       <WrappedComponent {...props} idx={idx}>
         {props.children}

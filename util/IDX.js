@@ -3,8 +3,8 @@ import { ThreeIdConnect } from '3id-connect'
 import ceramic from './ceramic'
 
 const aliases = {
-  businessProfile:
-    'ceramic://k3y52l7qbv1frxk9ijwxoej9208ujtmqu6fpbjklvj6jyi3p0ogln9q8uhf7qzncw',
+  organization:
+    'kjzl6cwe1jw148u9qxkp7caz7jtrz2p7pt7icathzvsruktb7xxq715vlrm4wsn',
 }
 class IDX {
   constructor() {

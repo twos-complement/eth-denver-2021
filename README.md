@@ -64,8 +64,25 @@ TBD: Delete this web2 flow ;)
 
 ### Publish Schema
 
-`idx did:create -l businessProfile`
+Set dev ceramic net:
+`idx bootstrap -c https://ceramic-clay.3boxlabs.com`
+
+OR (if you already set config to another network):
+`idx config:set ceramic-url https://ceramic-clay.3boxlabs.com`
+
+Create a DID for each schema:
+`idx did:create -l <SchemaName>`
+
+Publish each schema:
 `idx schema:publish <DID> <JSONSchemaString>`
+
+Create a DID for each definition:
+`idx did:create -l <SchemaName>`
+
+Create definition of each schema:
+`idx definition:create <DID> -n <Name> -d <Description> --schema=<CeramicURL>`
+
+Set definition to aliases in `util/IDX.js`
 
 ## Resources
 
