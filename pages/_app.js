@@ -22,9 +22,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        {/*<ApolloProvider client={apolloClient}>*/}
+        <Component {...pageProps} />
+        {/*</ApolloProvider>*/}
       </ThemeProvider>
     </>
   )

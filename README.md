@@ -62,6 +62,11 @@ Set the `NEXT_PUBLIC_LOGIN_PATH` to the full Cognito login page, including the c
 
 TBD: Delete this web2 flow ;)
 
+### Publish Schema
+
+`idx did:create -l businessProfile`
+`idx schema:publish <DID> <JSONSchemaString>`
+
 ## Resources
 
 To learn more about Next.js, take a look at the following resources:

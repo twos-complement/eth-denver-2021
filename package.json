@@ -11,8 +11,11 @@
     "build-storybook": "build-storybook --no-dll"
   },
   "dependencies": {
+    "3id-connect": "^1.0.0-alpha.15",
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
+    "@ceramicnetwork/http-client": "^0.9.6",
+    "@ceramicstudio/idx": "^0.7.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
