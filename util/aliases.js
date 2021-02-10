@@ -1,7 +1,9 @@
+import { definitions } from './ceramic-config.json'
+
 // Define Ceramic/IDX aliases:
 const aliases = {
-  organization:
-    'kjzl6cwe1jw148u9qxkp7caz7jtrz2p7pt7icathzvsruktb7xxq715vlrm4wsn',
+  ...definitions,
+  // Add 3rd party / custom aliases here:
 }
 
 export default aliases

@@ -2,17 +2,12 @@ import ThreeIdProvider from '3id-did-provider'
 import IDX from './IDX'
 import ceramic from './ceramic'
 import aliases from './aliases'
+import seed from './soc-seed'
 
 let idx
 
 export async function getIdx() {
   if (idx) return idx
-
-  //TODO make private:
-  const seed = Uint8Array.from(
-    '0dddac007ef6cff35111267b443cad45b44641716dc1ddbc191f2dc6acbf7473',
-  )
-
   // Permission dialog (auto accept for SoC):
   function getPermission(request) {
     return request.payload.paths

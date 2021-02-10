@@ -6,7 +6,7 @@ export default async (req, res) => {
   const organization = {
     name: req.body.name,
   }
-  const docid = await idx.createOrganization(organization)
+  const docid = await idx.addOrganizationToList(organization)
 
   res.statusCode = 200
   res.json({ success: true, docid: docid.toString(), organization })
