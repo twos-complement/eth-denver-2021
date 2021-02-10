@@ -1,26 +1,19 @@
 import { IDX as _IDX } from '@ceramicstudio/idx'
-import { ThreeIdConnect } from '3id-connect'
-import ceramic from './ceramic'
 
-const schemaOwner = 'did:key:z6MkgTar9aC1bYSWgZd4goo17LayCjbR1h2wjJhoSYaV6zhf'
+// TODO: abstract to config:
 const orgOwner =
-  'did:3:kjzl6cwe1jw1491brjhid8jl31hiyyf3ggxq8pv9qhz2zn9c8ml24vostu6w7cv'
-const aliases = {
-  organization:
-    'kjzl6cwe1jw148u9qxkp7caz7jtrz2p7pt7icathzvsruktb7xxq715vlrm4wsn',
-}
+  'did:3:kjzl6cwe1jw147v2nmms5cka2qxvi4vylfolzuq4sk4rwn3l9t0mhxrlt1qiltp'
 
 class IDX {
-  constructor() {
+  constructor({ ceramic, aliases }) {
     this.instance = new _IDX({ ceramic, aliases })
-    this.threeIdConnect = new ThreeIdConnect()
-    window.ix = this.instance
   }
 
   async createOrganization({ name }) {
-    const resp = await this.instance.set('organization', {
+    const docid = await this.instance.set('organization', {
       name,
     })
+    return docid
   }
 
   async loadOrganizationDocs() {

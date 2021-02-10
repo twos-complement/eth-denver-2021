@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "3id-connect": "^1.0.0-alpha.15",
+    "3id-did-provider": "^0.5.1",
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
     "@ceramicnetwork/http-client": "^0.9.6",

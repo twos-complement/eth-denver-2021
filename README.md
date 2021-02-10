@@ -36,10 +36,6 @@ Local development: set values in .env
 | NEXT_PUBLIC_API_PATH   | `http://localhost:3000`       | Location of API (set to localhost or staging for development, production for production)                                                                                                                                                     |
 | NEXT_PUBLIC_LOGIN_PATH | `http://localhost:3000/login` | Location of Cognito login page. Use the API test flow in development/staging: `https://staging-api-domain/login`. Use the direct Cognito login page for production (find path in Cloud Formation Outputs - be sure to include redirect_url). |
 
-#### System Environment Variables
-
-Vercel can add [system environment variables](https://vercel.com/docs/build-step#system-environment-variables). Add `VERCEL_GITHUB_COMMIT_SHA` (at minimum for the /api/version endpoint) and leave the value blank, and Vercel will populate these values.
-
 ### Authentication Flow
 
 TBD - myColorado and/or wallet + IDX identity linking.
