@@ -1,13 +1,10 @@
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
-import { ApolloProvider } from '@apollo/react-hooks'
 
-import { useApollo } from '../util/apolloClient'
 import theme from '../util/theme'
 import GlobalStyles from '../components/ui/GlobalStyles'
 
 function MyApp({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps)
   return (
     <>
       <Head>
@@ -22,9 +19,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        {/*<ApolloProvider client={apolloClient}>*/}
         <Component {...pageProps} />
-        {/*</ApolloProvider>*/}
       </ThemeProvider>
     </>
   )
