@@ -8,13 +8,10 @@ const CreateOrganization = ({ idx }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit() {
-    console.log('requesting...', name)
-    const resp = await idx.set('organization', {
+    await idx.createOrganization({
       name,
     })
 
-    // <DID>
-    console.log(resp)
     setIsLoading(false)
   }
 

@@ -24,8 +24,9 @@ const withIdx = WrappedComponent => {
         const provider = await idx.threeIdConnect.getDidProvider()
         // Set DID Provider on Ceramic:
         await ceramic.setDIDProvider(provider)
+        window.c = ceramic
 
-        setIdx(idx.instance)
+        setIdx(idx)
       }
 
       setup()
