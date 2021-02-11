@@ -27,7 +27,7 @@ const Home = () => {
         <h1>Welcome to ETHDenver 2021!</h1>
         <h2>Organizations</h2>
         <div>
-          {!organizations.length && <span>Loading Organizations...</span>}
+          {!organizations.length && <h4>Loading Organizations...</h4>}
           {organizations.map(organization => (
             <OrganizationListItem key={organization.id} id={organization.id} />
           ))}

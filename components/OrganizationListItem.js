@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 
 import IDXContext from './contexts/idx-context'
+import ReviewsContext from './contexts/reviews-context'
+import Review from './ui/Review'
 import AddReview from './AddReview'
 
 const Wrapper = styled.div`
@@ -14,6 +16,7 @@ const Wrapper = styled.div`
 const OrganizationListItem = ({ id }) => {
   const [organization, setOrganization] = useState()
   const idx = useContext(IDXContext)
+  const { reviews } = useContext(ReviewsContext)
 
   useEffect(() => {
     async function load() {
@@ -24,12 +27,15 @@ const OrganizationListItem = ({ id }) => {
     load()
   }, [])
 
+  const review = reviews.filter(review => review.organization.match(id))[0]
+
   return (
     <Wrapper>
       <h3>
         {organization ? organization.name : `Loading [${id}] from Ceramic...`}
       </h3>
-      <AddReview organizationId={id} />
+      {review && <Review review={review} />}
+      {!review && <AddReview organizationId={id} />}
     </Wrapper>
   )
 }

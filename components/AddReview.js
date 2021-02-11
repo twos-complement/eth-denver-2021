@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 
 import IDXContext from './contexts/idx-context'
+import ReviewsContext from './contexts/reviews-context'
 import FiveStars from './ui/FiveStars'
 
 const AddReview = ({ organizationId }) => {
@@ -10,8 +11,9 @@ const AddReview = ({ organizationId }) => {
   const [description, setDescription] = useState('')
   const [stars, setStars] = useState(0)
   const idx = useContext(IDXContext)
+  const { refresh } = useContext(ReviewsContext)
 
-  if (complete) return <div>Thanks for leaving a review!</div>
+  if (complete) return <></>
 
   if (loading) return <div>Posting review on Ceramic...</div>
 
@@ -39,6 +41,7 @@ const AddReview = ({ organizationId }) => {
             stars,
             description,
           })
+          await refresh()
           setComplete(true)
         }}
       >

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 
 import { IDXProvider } from '../components/contexts/idx-context'
+import { ReviewsProvider } from '../components/contexts/reviews-context'
 import withIdx from '../components/hoc/withIdx'
 import theme from '../util/theme'
 import GlobalStyles from '../components/ui/GlobalStyles'
@@ -21,8 +22,10 @@ function MyApp({ Component, pageProps, idx }) {
       </Head>
       <ThemeProvider theme={theme}>
         <IDXProvider value={idx}>
-          <GlobalStyles />
-          <Component {...pageProps} />
+          <ReviewsProvider>
+            <GlobalStyles />
+            <Component {...pageProps} />
+          </ReviewsProvider>
         </IDXProvider>
       </ThemeProvider>
     </>
