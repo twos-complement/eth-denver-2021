@@ -45,13 +45,13 @@ class IDX {
     return data
   }
 
-  async addReviewToList({ stars, description, organization }) {
+  async addReviewToList({ stars, description, organizationId }) {
     let current = await this.loadReviewsList()
 
     const review = {
       stars,
       description,
-      organization,
+      organization: `ceramic://${organizationId}`,
     }
 
     // Create Review on Ceramic:
@@ -59,7 +59,7 @@ class IDX {
       content: review,
       metadata: {
         schema: schemas.Review,
-        controllers: [this.idx.id],
+        controllers: [this.instance.id],
       },
     })
 
