@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { IDXProvider } from '../components/contexts/idx-context'
 import { ReviewsProvider } from '../components/contexts/reviews-context'
+import { IdentityVerificationsProvider } from '../components/contexts/identity-verifications-context'
 import withIdx from '../components/hoc/withIdx'
 import theme from '../util/theme'
 import GlobalStyles from '../components/ui/GlobalStyles'
@@ -23,8 +24,10 @@ function MyApp({ Component, pageProps, idx }) {
       <ThemeProvider theme={theme}>
         <IDXProvider value={idx}>
           <ReviewsProvider>
-            <GlobalStyles />
-            <Component {...pageProps} />
+            <IdentityVerificationsProvider>
+              <GlobalStyles />
+              <Component {...pageProps} />
+            </IdentityVerificationsProvider>
           </ReviewsProvider>
         </IDXProvider>
       </ThemeProvider>

@@ -35,7 +35,7 @@ const OrganizationListItem = ({ id }) => {
         {organization ? organization.name : `Loading [${id}] from Ceramic...`}
       </h3>
       {review && <Review review={review} />}
-      {!review && <AddReview organizationId={id} />}
+      {!review && <AddReview organization={id} />}
     </Wrapper>
   )
 }

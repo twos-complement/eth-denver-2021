@@ -1,10 +1,6 @@
 import { IDX as _IDX } from '@ceramicstudio/idx'
 import { schemas } from './ceramic-config.json'
 
-// TODO: abstract to config:
-const SOCDID =
-  'did:3:kjzl6cwe1jw147bgidx8l6ts9xdtvpiu5s9jh4k505tk052uwlw8fr8zkp7tuyh'
-
 class IDX {
   constructor({ ceramic, aliases }) {
     this.instance = new _IDX({ ceramic, aliases })
@@ -20,13 +16,13 @@ class IDX {
       content: { name },
       metadata: {
         schema: schemas.Organization,
-        controllers: [SOCDID],
+        controllers: [this.aliases.ownerDid],
       },
     })
 
     // Set reference to Organization in "organizations" on SoC IDX index:
     const orgListDoc = await this.instance.set('organizations', {
-      organizations: [...current, { id: orgDoc.id.toString() }],
+      organizations: [...current, { id: `ceramic://${orgDoc.id.toString()}` }],
     })
 
     return orgListDoc
@@ -34,24 +30,24 @@ class IDX {
 
   async loadOrganizationList() {
     // Load organizations list from SoC index:
-    const data = await this.instance.get('organizations', SOCDID)
+    const data = await this.instance.get('organizations', this.aliases.ownerDid)
     if (!data) return []
     return data.organizations
   }
 
   async loadOrganization(docId) {
     // Load organization from Ceramic:
-    const data = await this.ceramic.loadDocument(docId, SOCDID)
+    const data = await this.ceramic.loadDocument(docId, this.aliases.ownerDid)
     return data
   }
 
-  async addReviewToList({ stars, description, organizationId }) {
+  async addReviewToList({ stars, description, organization }) {
     let current = await this.loadReviewsList()
 
     const review = {
       stars,
       description,
-      organization: `ceramic://${organizationId}`,
+      organization,
     }
 
     // Create Review on Ceramic:
@@ -76,6 +72,70 @@ class IDX {
     const data = await this.instance.get('reviews')
     if (!data) return []
     return data.reviews
+  }
+
+  async addIdentityVerificationToList({ did, challenge }) {
+    let current = await this.loadIdentityVerificationList()
+
+    // Create IdentityVerification on Ceramic:
+    const identityVerificationDoc = await this.ceramic.createDocument('tile', {
+      content: { did, challenge },
+      metadata: {
+        schema: schemas.IdentityVerification,
+        controllers: [this.aliases.ownerDid],
+      },
+    })
+
+    // Set reference to IdentityVerification in "identityVerifications" on SoC IDX index:
+    const identityVerificationListDoc = await this.instance.set(
+      'identityVerifications',
+      {
+        identityVerifications: [
+          ...current,
+          { id: `ceramic://${identityVerificationDoc.id.toString()}` },
+        ],
+      },
+    )
+
+    return identityVerificationDoc.id.toString()
+  }
+
+  async loadIdentityVerificationList() {
+    // Load identityVerification list from SoC index:
+    const data = await this.instance.get(
+      'identityVerifications',
+      this.aliases.ownerDid,
+    )
+    if (!data) return []
+    return data.identityVerifications
+  }
+
+  async loadIdentityVerification(docId) {
+    // Load identityVerification object from Ceramic:
+    const data = await this.ceramic.loadDocument(docId, this.aliases.ownerDid)
+    return data
+  }
+
+  async verifyIdentity({ docId, signedChallenge, name }) {
+    const { kid } = await this.ceramic.did.verifyJWS(signedChallenge)
+
+    const identityVerificationDoc = await this.loadIdentityVerification(docId)
+    console.log('verified kid:', kid)
+    console.log('lookup kid:', identityVerificationDoc.state.content.did)
+
+    if (!kid.match(identityVerificationDoc.state.content.did))
+      throw new Error('Invalid JWS on identityVerification challenge!')
+
+    const update = {
+      content: {
+        ...identityVerificationDoc.state.content,
+        name,
+        isVerified: true,
+      },
+    }
+    await identityVerificationDoc.change(update)
+
+    return true
   }
 }
 

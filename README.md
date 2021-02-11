@@ -21,4 +21,11 @@
 
 ### Authentication Flow
 
-TBD - myColorado and/or wallet + IDX identity linking.
+1. User accepts myColorado digital ID consent
+2. User requests challenge from API
+3. API uses SoC IDX to create `identityVerification` record with the DID and the challenge
+4. User signs and passes signed challenge, and `identityVerification` docId to myColorado authentication flow
+5. myColorado posts webhook back to API with signed challenge
+6. API verifies DID signature on challenge
+7. API uses SoC IDX to update `identityVerification` record with the DID and the person's public info
+8. Dapp reads public verification records to confirm DID ownership

@@ -4,7 +4,7 @@ import IDXContext from './contexts/idx-context'
 import ReviewsContext from './contexts/reviews-context'
 import FiveStars from './ui/FiveStars'
 
-const AddReview = ({ organizationId }) => {
+const AddReview = ({ organization }) => {
   const [showForm, setShowForm] = useState(false)
   const [loading, setLoading] = useState(false)
   const [complete, setComplete] = useState(false)
@@ -37,7 +37,7 @@ const AddReview = ({ organizationId }) => {
           e.preventDefault()
           setLoading(true)
           await idx.addReviewToList({
-            organizationId,
+            organization,
             stars,
             description,
           })

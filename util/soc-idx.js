@@ -8,6 +8,7 @@ let idx
 
 export async function getIdx() {
   if (idx) return idx
+
   // Permission dialog (auto accept for SoC):
   function getPermission(request) {
     return request.payload.paths

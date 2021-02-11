@@ -1,7 +1,7 @@
 //TODO make private:
 const seed = Uint8Array.from(
   Buffer.from(
-    '0dddac007ef6cff35111267b443cad45b44641716dc1ddbc191f2dc6acbf7473',
+    '5ea011be82cddb07a94b0375dcfde363c64d9e6bc599d360d37f161c23d736c9',
     'hex',
   ),
 )

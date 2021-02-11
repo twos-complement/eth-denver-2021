@@ -1,12 +1,16 @@
 {
+	"ownerDid": "did:3:kjzl6cwe1jw1461hfg3c9dsnawye091748upj3j4smgi1el0mbg7jrpaendhynn",
 	"definitions": {
-		"organizations": "kjzl6cwe1jw14an4uvp6a54bcsukadcfqp1878p1cgghy2gnz9ad9iljprjxot4",
-		"reviews": "kjzl6cwe1jw145lahlbva8m3jy7nk3amac5a7qc517h6ogyacp9l1dvjl5uyqbl"
+		"organizations": "kjzl6cwe1jw14b9j8ri4laph7gn26cgr0js8ad3cy1sj1p7st3xeawtwr4637p1",
+		"reviews": "kjzl6cwe1jw147yiz16k99s6wqyam4251xvecx1rvuvmw0osta4l6lvizkq9o5u",
+		"identityVerifications": "kjzl6cwe1jw146sviu3gbqgs4tv32n5x1mkk15169nbm5awnzv80pr59z33vr0q"
 	},
 	"schemas": {
-		"Organization": "ceramic://k3y52l7qbv1fryl6dcd50rhmojuk4pjnhxkrvsjabb6vchh5x8l4oftdxauzjgfeo",
-		"OrganizationList": "ceramic://k3y52l7qbv1fryqnbe3edwmna3yf8ymon00y35j636s5eujmhp71sf1r1oig3p3b4",
-		"Review": "ceramic://k3y52l7qbv1fryi8yazsbhfx4egys9rlskbdbgrxerggupu4ygw4fzot0xf3hf18g",
-		"ReviewList": "ceramic://k3y52l7qbv1frxxas1oebcpxri8z499hyziqof53q9ysyehmg8zge5vrf29qe5ji8"
+		"Organization": "ceramic://k3y52l7qbv1frybcsypt7w6d4sojhx1o83zatngfabsz6xxp2zyx3xczcox5pzqww",
+		"OrganizationList": "ceramic://k3y52l7qbv1fry4dx4bgpxrgkc4rkbxneh9gpp49z66mkkt03xij9lt07r34864n4",
+		"Review": "ceramic://k3y52l7qbv1frxw82wds2q4ycfbbu0ix3oadhwlvh5lk22rg3gqidufin22ticwlc",
+		"ReviewList": "ceramic://k3y52l7qbv1frxptslbqdstd43ern7kwy2mpbwv8f1947hi4gqh2f5sm4p1smgy68",
+		"IdentityVerification": "ceramic://k3y52l7qbv1frxvta9xw07lhjyuxq13v4xu2rkvsbp62k7jy6xgs2ms2u33lhhfr4",
+		"IdentityVerificationList": "ceramic://k3y52l7qbv1frxm76oi3ydgbs8y19n0q1d2kg47fxnu7ju16qtnwglgnh04h6hq0w"
 	}
 }

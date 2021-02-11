@@ -5,7 +5,7 @@ import IDXContext from './idx-context'
 const ReviewsContext = React.createContext()
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState()
+  const [reviews, setReviews] = useState([])
   const idx = useContext(IDXContext)
 
   async function refresh() {
