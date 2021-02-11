@@ -1,13 +1,12 @@
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
-import { ApolloProvider } from '@apollo/react-hooks'
 
-import { useApollo } from '../util/apolloClient'
+import { IDXProvider } from '../components/contexts/idx-context'
+import withIdx from '../components/hoc/withIdx'
 import theme from '../util/theme'
 import GlobalStyles from '../components/ui/GlobalStyles'
 
-function MyApp({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps)
+function MyApp({ Component, pageProps, idx }) {
   return (
     <>
       <Head>
@@ -21,13 +20,13 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        {/*<ApolloProvider client={apolloClient}>*/}
-        <Component {...pageProps} />
-        {/*</ApolloProvider>*/}
+        <IDXProvider value={idx}>
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </IDXProvider>
       </ThemeProvider>
     </>
   )
 }
 
-export default MyApp
+export default withIdx(MyApp)

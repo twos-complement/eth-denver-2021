@@ -26,7 +26,7 @@ class IDX {
 
     // Set reference to Organization in "organizations" on SoC IDX index:
     const orgListDoc = await this.instance.set('organizations', {
-      organizations: [...current, { name }],
+      organizations: [...current, { id: orgDoc.id.toString() }],
     })
 
     return orgListDoc
@@ -37,6 +37,12 @@ class IDX {
     const data = await this.instance.get('organizations', SOCDID)
     if (!data) return []
     return data.organizations
+  }
+
+  async loadOrganization(docId) {
+    // Load organization from Ceramic:
+    const data = await this.ceramic.loadDocument(docId, SOCDID)
+    return data
   }
 
   async addReviewToList({ stars, description, organization }) {

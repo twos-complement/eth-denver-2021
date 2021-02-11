@@ -1,9 +1,12 @@
 {
 	"definitions": {
-		"organizations": "kjzl6cwe1jw145qo2sg30dhmx1tlg7ahw9dbcm4t9s38p0een05aakp7udghe8s"
+		"organizations": "kjzl6cwe1jw14an4uvp6a54bcsukadcfqp1878p1cgghy2gnz9ad9iljprjxot4",
+		"reviews": "kjzl6cwe1jw145lahlbva8m3jy7nk3amac5a7qc517h6ogyacp9l1dvjl5uyqbl"
 	},
 	"schemas": {
-		"Organization": "ceramic://k3y52l7qbv1fryqquqkrolypqrfa8l7otc3m9gy8bhmksv5kiazqmv1g8ctyw4kxs",
-		"OrganizationList": "ceramic://k3y52l7qbv1frylldirjic6zqkbjptzd93ibbho69wh1rhf73ioe4m85bfeuoajgg"
+		"Organization": "ceramic://k3y52l7qbv1fryl6dcd50rhmojuk4pjnhxkrvsjabb6vchh5x8l4oftdxauzjgfeo",
+		"OrganizationList": "ceramic://k3y52l7qbv1fryqnbe3edwmna3yf8ymon00y35j636s5eujmhp71sf1r1oig3p3b4",
+		"Review": "ceramic://k3y52l7qbv1fryi8yazsbhfx4egys9rlskbdbgrxerggupu4ygw4fzot0xf3hf18g",
+		"ReviewList": "ceramic://k3y52l7qbv1frxxas1oebcpxri8z499hyziqof53q9ysyehmg8zge5vrf29qe5ji8"
 	}
 }

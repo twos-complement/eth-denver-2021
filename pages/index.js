@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
-import Link from 'next/Link'
 
-import withIdx from '../components/hoc/withIdx'
-import OrganizationListItem from '../components/ui/OrganizationListItem'
+import IDXContext from '../components/contexts/idx-context'
+import OrganizationListItem from '../components/OrganizationListItem'
 
-const Home = ({ idx }) => {
+const Home = () => {
   const [organizations, setOrganizations] = useState([])
+  const idx = useContext(IDXContext)
 
   async function loadOrganizations() {
     const organizations = await idx.loadOrganizationList()
@@ -27,11 +27,9 @@ const Home = ({ idx }) => {
         <h1>Welcome to ETHDenver 2021!</h1>
         <h2>Organizations</h2>
         <div>
+          {!organizations.length && <span>Loading Organizations...</span>}
           {organizations.map(organization => (
-            <OrganizationListItem
-              key={organization.name}
-              organization={organization}
-            />
+            <OrganizationListItem key={organization.id} id={organization.id} />
           ))}
         </div>
       </main>
@@ -39,4 +37,4 @@ const Home = ({ idx }) => {
   )
 }
 
-export default withIdx(Home)
+export default Home
