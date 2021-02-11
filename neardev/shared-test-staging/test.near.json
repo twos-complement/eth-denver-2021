@@ -1,0 +1,10 @@
+[
+  {
+    "account_id": "test.near",
+    "private_key": "ed25519:2wyRcSwSuHtRVmkMCGjPwnzZmQLeXLzLLyED1NDMt4BjnKgQL6tF85yBx6Jr26D2dUNeC716RBoTxntVHsegogYw"
+  },
+  {
+    "account_id": "eth-denver-2021.testnet",
+    "private_key": "ed25519:5fWYCZXC6met6MNsxL87AQjXsaoHTLTrpT8UjLAAudjkQkVEYuNfgiL2jnhjQ8Kt69jBzBqQXc9ZYLJx4fPz3yfu"
+  }
+]
