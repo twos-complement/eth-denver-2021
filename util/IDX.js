@@ -24,7 +24,7 @@ class IDX {
       },
     })
 
-    // Set reference to Organization in "organizations" on SoC idx index:
+    // Set reference to Organization in "organizations" on SoC IDX index:
     const orgListDoc = await this.instance.set('organizations', {
       organizations: [...current, { name }],
     })
@@ -37,6 +37,39 @@ class IDX {
     const data = await this.instance.get('organizations', SOCDID)
     if (!data) return []
     return data.organizations
+  }
+
+  async addReviewToList({ stars, description, organization }) {
+    let current = await this.loadReviewsList()
+
+    const review = {
+      stars,
+      description,
+      organization,
+    }
+
+    // Create Review on Ceramic:
+    const reviewDoc = await this.ceramic.createDocument('tile', {
+      content: review,
+      metadata: {
+        schema: schemas.Review,
+        controllers: [this.idx.id],
+      },
+    })
+
+    // Set reference to Review in "reviews" on user's IDX index:
+    const reviewListDoc = await this.instance.set('reviews', {
+      reviews: [...current, review],
+    })
+
+    return reviewListDoc
+  }
+
+  async loadReviewsList() {
+    // Load reviews list from user's IDX index:
+    const data = await this.instance.get('reviews')
+    if (!data) return []
+    return data.reviews
   }
 }
 

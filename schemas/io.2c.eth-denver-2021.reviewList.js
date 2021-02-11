@@ -1,14 +1,14 @@
-const OrganizationListSchema = {
+const ReviewListSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
-  title: 'io.2c.ethdenver-2021.organizationList',
+  title: 'io.2c.ethdenver-2021.reviewList',
   type: 'object',
   properties: {
     notes: {
       type: 'array',
-      title: 'organizations',
+      title: 'reviews',
       items: {
         type: 'object',
-        title: 'io.2c.ethdenver-2021.organization',
+        title: 'io.2c.ethdenver-2021.review',
         properties: {
           id: {
             $ref: '#/definitions/CeramicDocId',
@@ -26,4 +26,4 @@ const OrganizationListSchema = {
   },
 }
 
-export default OrganizationListSchema
+export default ReviewListSchema
