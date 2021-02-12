@@ -127,9 +127,12 @@ class IDX {
   async verifyIdentity({ docId, signedChallenge, name }) {
     const { kid } = await this.ceramic.did.verifyJWS(signedChallenge)
 
+    console.log('Verifying JSON Web Signature of user IDX challenge phrase...')
     const identityVerificationDoc = await this.loadIdentityVerification(docId)
     console.log('verified kid:', kid)
+    console.log('signed challenge', signedChallenge)
     console.log('lookup kid:', identityVerificationDoc.state.content.did)
+    console.log('User IDX DID - identity verified:', name)
 
     if (!kid.match(identityVerificationDoc.state.content.did))
       throw new Error('Invalid JWS on identityVerification challenge!')

@@ -57,6 +57,10 @@ const Home = () => {
           <Link href="/link-identity-to-unstoppable-domain">
             <a>Link Identity to Unstoppable Domain</a>
           </Link>
+
+          <Spacer />
+
+          <h3>Organizations</h3>
           <OrganizationGrid>
             {!organizations.length && <h4>Loading Organizations...</h4>}
             {organizations.map(organization => (

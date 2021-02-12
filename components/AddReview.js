@@ -31,6 +31,8 @@ const AddReview = ({ organization }) => {
   const { refresh } = useContext(ReviewsContext)
   const [imageUrl, setImageUrl] = useState()
   const [videoUrl, setVideoUrl] = useState()
+  const [idxImageUrl, setIdxImageUrl] = useState()
+  const [idxVideoUrl, setIdxVideoUrl] = useState()
 
   const uploadImage = async (acceptedFiles, callback) => {
     const file = acceptedFiles[0]
@@ -54,6 +56,7 @@ const AddReview = ({ organization }) => {
         console.log(`Image Url --> ${url}`)
 
         setImageUrl(url)
+        setIdxImageUrl(`ipfs://${z.cid.toString()}`)
 
         callback(url)
         resolve(url)
@@ -87,6 +90,7 @@ const AddReview = ({ organization }) => {
       console.log(`Video Url --> ${url}`)
 
       setVideoUrl(url)
+      setIdxVideoUrl(`ipfs://${z.cid.toString()}`)
     }
 
     reader.readAsArrayBuffer(file)
@@ -118,8 +122,8 @@ const AddReview = ({ organization }) => {
             organization,
             stars,
             description,
-            imageUrl,
-            videoUrl,
+            idxImageUrl,
+            idxVideoUrl,
           })
           await refresh()
           setComplete(true)
