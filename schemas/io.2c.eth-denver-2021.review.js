@@ -15,11 +15,22 @@ const ReviewSchema = {
     organization: {
       $ref: '#/definitions/CeramicDocId',
     },
+    imageUrl: {
+      $ref: '#/definitions/IPFSDocId',
+    },
+    videoUrl: {
+      $ref: '#/definitions/IPFSDocId',
+    },
   },
   definitions: {
     CeramicDocId: {
       type: 'string',
       pattern: '^ceramic://.+(\\\\?version=.+)?',
+      maxLength: 150,
+    },
+    IPFSDocId: {
+      type: 'string',
+      pattern: '^ipfs://.+(\\\\?version=.+)?',
       maxLength: 150,
     },
   },

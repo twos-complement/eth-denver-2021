@@ -1,6 +1,4 @@
-import { useState, Fragment } from 'react'
-import createClient from 'ipfs-http-client'
-import Head from 'next/head'
+import { useEffect, useState, Fragment } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled, { css } from 'styled-components'
 
@@ -53,7 +51,7 @@ const DropzoneContainer = styled.div`
   `}
 `
 
-const Dropzone = ({ onComplete, accept }) => {
+const Dropzone = ({ onComplete, accept, autoSubmit }) => {
   const [title, setTitle] = useState('')
   const [loader, setLoader] = useState(false)
   const {
@@ -79,15 +77,20 @@ const Dropzone = ({ onComplete, accept }) => {
       subText: 'We are sending your file to IPFS for safekeeping',
     })
 
-    setTimeout(async () => {
+    await onComplete(acceptedFiles, () => {
       // Callback:
       setLoader({
         title: 'Success!',
-        subText: 'Redirecting back to your reviews',
+        subText: 'Your file has been successfully uploaded and pinned to IPFS!',
       })
-      await onComplete(acceptedFiles)
-    }, 300)
+    })
   }
+
+  useEffect(async () => {
+    if (!loader && autoSubmit && isHasFilesToUpload) {
+      await submit()
+    }
+  })
 
   function renderForm() {
     return (
@@ -136,86 +139,7 @@ const Dropzone = ({ onComplete, accept }) => {
 
 Dropzone.defaultProps = {
   accept: 'image/*',
+  autoSubmit: false,
 }
 
-export default function Upload() {
-  const [src, setSrc] = useState(
-    'https://ipfs.infura.io/ipfs/QmZAnYYs5xM9zpLaUoY5EZVJE9vHHMdb9qYQhbTa9DZBXD?filename=eclipse.jpeg',
-  )
-
-   const [videoSrc, setVideoSrc] = useState('https://ipfs.infura.io/ipfs/QmfPC6LFfhCXmjD9yDU4vFQj2zuAmYiz2z7VtWSg3GXGcF?filename=sample-mov-file.mov'
-  )
-
-
-  const uploadImage = async acceptedFiles => {
-    const file = acceptedFiles[0]
-    const ipfs = createClient('https://ipfs.infura.io:5001')
-    const reader = new FileReader()
-
-    console.log('Uploading: ', file.path)
-
-    reader.onload = async () => {
-      var arrayBuffer = reader.result
-      const fileBuffer = new Uint8Array(arrayBuffer)
-
-      const z = await ipfs.add({ path: file.path, content: fileBuffer })
-
-      let url = `https://ipfs.infura.io/ipfs/${z.cid.toString()}?filename=${
-        z.path
-      }`
-
-      console.log(`Image Url --> ${url}`)
-
-      setSrc(url)
-    }
-
-    reader.readAsArrayBuffer(file)
-  }
-
-   const uploadVideo = async acceptedFiles => {
-    const file = acceptedFiles[0]
-    const ipfs = createClient('https://ipfs.infura.io:5001')
-    const reader = new FileReader()
-
-    console.log('Uploading: ', file.path)
-
-    reader.onload = async () => {
-      var arrayBuffer = reader.result
-      const fileBuffer = new Uint8Array(arrayBuffer)
-
-      const z = await ipfs.add({ path: file.path, content: fileBuffer })
-
-      let url = `https://ipfs.infura.io/ipfs/${z.cid.toString()}?filename=${
-        z.path
-      }`
-
-      console.log(`Video Url --> ${url}`)
-
-      setVideoSrc(url)
-    }
-
-    reader.readAsArrayBuffer(file)
-  }
-
-  return (
-    <div>
-      <Head>
-        <title>Review Image Upload</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-      <div>
-      <h3>Upload Image</h3>
-        <img src={src}></img>
-        <Dropzone onComplete={uploadImage} />
-        </div>
-        <div>
-      <h3>Upload Video</h3>
-        <video controls width="250">
-        <source src={videoSrc}/></video>
-        <Dropzone onComplete={uploadVideo} accept="video/*"/>
-        </div>
-      </main>
-    </div>
-  )
-}
+export default Dropzone
