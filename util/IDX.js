@@ -41,13 +41,21 @@ class IDX {
     return data
   }
 
-  async addReviewToList({ stars, description, organization }) {
+  async addReviewToList({
+    stars,
+    description,
+    organization,
+    imageUrl,
+    videoUrl,
+  }) {
     let current = await this.loadReviewsList()
 
     const review = {
       stars,
       description,
       organization,
+      imageUrl,
+      videoUrl,
     }
 
     // Create Review on Ceramic:
