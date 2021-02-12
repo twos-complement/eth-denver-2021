@@ -1,11 +1,29 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
+import styled from 'styled-components'
 import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
 
 import { SAMPLE_MY_COLORADO_PAYLOAD } from '../util/mocks'
 import IDXContext from '../components/contexts/idx-context'
-import { sign } from 'jsonwebtoken'
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: 40px;
+`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+  > * {
+    padding-bottom: 30px;
+  }
+`
 
 const MyColorado = () => {
   const [verifying, setVerifying] = useState(false)
@@ -45,12 +63,15 @@ const MyColorado = () => {
 
   if (verified)
     return (
-      <div>
-        <h1>Verified!</h1>
-        <Link href="/">
-          <a>Return to Home</a>
-        </Link>
-      </div>
+      <Wrapper>
+        <Content>
+          <img src="/scout1.png" width="200" />
+          <h1>Verified!</h1>
+          <Link href="/">
+            <a>Return to Home</a>
+          </Link>
+        </Content>
+      </Wrapper>
     )
 
   return (
@@ -60,14 +81,18 @@ const MyColorado = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Verify Identity With myColorado Digital ID</h1>
-        <h2>
-          By clicking "Verify", I consent to the State of Colorado publicly
-          verifying my IDX ID against myColorado digital ID.
-        </h2>
-        <button onClick={verify} disabled={verifying}>
-          {verifying ? 'Verifying...' : 'Verify'}
-        </button>
+        <Wrapper>
+          <Content>
+            <h2>Verify Identity With myColorado Digital ID</h2>
+            <h5>
+              By clicking "Verify", I consent to the State of Colorado publicly
+              verifying my IDX ID against myColorado digital ID.
+            </h5>
+            <button onClick={verify} disabled={verifying}>
+              {verifying ? 'Verifying...' : 'Verify'}
+            </button>
+          </Content>
+        </Wrapper>
       </main>
     </div>
   )

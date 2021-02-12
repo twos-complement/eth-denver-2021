@@ -1,9 +1,13 @@
-import { useState, useContext } from 'react'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  padding: 20px 0;
+`
 
 import FiveStars from './FiveStars'
 
 const Review = ({ review: { stars, description, imageUrl, videoUrl } }) => (
-  <div>
+  <Wrapper>
     <p>Your review:</p>
     <FiveStars stars={stars} />
     <p>{description}</p>
@@ -23,7 +27,7 @@ const Review = ({ review: { stars, description, imageUrl, videoUrl } }) => (
         )}
       </div>
     )}
-  </div>
+  </Wrapper>
 )
 
 export default Review

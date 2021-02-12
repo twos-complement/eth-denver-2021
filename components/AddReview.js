@@ -10,6 +10,15 @@ import FiveStars from './ui/FiveStars'
 const Textarea = styled.textarea`
   width: 100%;
   height: 300px;
+  font-size: 1.7rem;
+  padding: 20px;
+  height: 120px;
+`
+
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
 `
 
 const AddReview = ({ organization }) => {
@@ -84,7 +93,7 @@ const AddReview = ({ organization }) => {
   }
   if (complete) return <></>
 
-  if (loading) return <div>Posting review on Ceramic...</div>
+  if (loading) return <h4>Posting review on Ceramic...</h4>
 
   if (!showForm)
     return (
@@ -116,30 +125,34 @@ const AddReview = ({ organization }) => {
           setComplete(true)
         }}
       >
-        <FiveStars onClick={value => setStars(value)} stars={stars} />
-        <Textarea
-          onChange={e => setDescription(e.target.value)}
-          placeholder="Add your review..."
-          value={description}
-        />
+        <ContentGrid>
+          <FiveStars onClick={value => setStars(value)} stars={stars} />
+          <Textarea
+            onChange={e => setDescription(e.target.value)}
+            placeholder="Add your review..."
+            value={description}
+          />
 
-        <div>
-          <h3>Upload Image</h3>
-          <img src={imageUrl}></img>
-          <Dropzone autoSubmit onComplete={uploadImage} />
-        </div>
+          <div>
+            <h4>Upload Image</h4>
+            <br />
+            {!!imageUrl && <img src={imageUrl}></img>}
+            <Dropzone autoSubmit onComplete={uploadImage} />
+          </div>
 
-        <div>
-          <h3>Upload Video</h3>
-          {!!videoUrl && (
-            <video controls width="250">
-              <source src={videoUrl} />
-            </video>
-          )}
-          <Dropzone autoSubmit onComplete={uploadVideo} accept="video/*" />
-        </div>
+          <div>
+            <h4>Upload Video</h4>
+            <br />
+            {!!videoUrl && (
+              <video controls width="250">
+                <source src={videoUrl} />
+              </video>
+            )}
+            <Dropzone autoSubmit onComplete={uploadVideo} accept="video/*" />
+          </div>
 
-        <button type="submit">Submit</button>
+          <button type="submit">Submit</button>
+        </ContentGrid>
       </form>
     </div>
   )

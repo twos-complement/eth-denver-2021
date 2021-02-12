@@ -2,6 +2,9 @@ import { useEffect, useState, Fragment } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled, { css } from 'styled-components'
 
+const SubText = styled.h5``
+const Title = styled.p``
+
 async function wait(ms) {
   return new Promise(resolve => {
     setTimeout(resolve, ms)
@@ -129,8 +132,8 @@ const Dropzone = ({ onComplete, accept, autoSubmit }) => {
       {!loader && renderForm()}
       {loader && (
         <div>
-          <h4>{loader.subText}</h4>
-          {loader.title}
+          <SubText>{loader.subText}</SubText>
+          <Title>{loader.title}</Title>
         </div>
       )}
     </div>

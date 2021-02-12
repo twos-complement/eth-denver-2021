@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import styled from 'styled-components'
 import Head from 'next/head'
 import Link from 'next/link'
 import Web3 from 'web3'
@@ -9,6 +10,24 @@ import UNSTOPPABLE_ABI from '../util/abis/unstoppable-domains.json'
 const UNSTOPPABLE_IDX_DID_KEY = 'truereview.idx.did'
 const UNSTOPPABLE_CONTRACT_ADDRESS =
   '0x95AE1515367aa64C462c71e87157771165B1287A'
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: 40px;
+`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+  > * {
+    margin-bottom: 30px;
+  }
+`
 
 const LinkIdentityToUnstoppableDomain = () => {
   const [loading, setLoading] = useState(false)
@@ -49,7 +68,10 @@ const LinkIdentityToUnstoppableDomain = () => {
         .get(UNSTOPPABLE_IDX_DID_KEY, tokenId)
         .call()
       setKeyValue(did)
-    } catch (e) {}
+    } catch (e) {
+      setKeyValue()
+      console.log(e)
+    }
   }
   // Refresh key value when token changes:
   useEffect(refreshKeyValue, [tokenId])
@@ -78,12 +100,15 @@ const LinkIdentityToUnstoppableDomain = () => {
 
   if (linked)
     return (
-      <div>
-        <h1>Linked!</h1>
-        <Link href="/">
-          <a>Return to Home</a>
-        </Link>
-      </div>
+      <Wrapper>
+        <Content>
+          <img src="/scout1.png" width="200" />
+          <h1>Linked!</h1>
+          <Link href="/">
+            <a>Return to Home</a>
+          </Link>
+        </Content>
+      </Wrapper>
     )
 
   return (
@@ -93,32 +118,42 @@ const LinkIdentityToUnstoppableDomain = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Link Identity to Unstoppable Domain</h1>
-        <h2>
-          Linking IDX DID to Unstoppable Domain will allow reviews to be
-          accessed via your crypto domain name.
-        </h2>
         <form
           onSubmit={e => {
             e.preventDefault()
             setIDXDIDOnUnstoppableDomain()
           }}
         >
-          <input
-            placeholder="Unstoppable Domain Token ID"
-            onChange={e => {
-              setTokenId(e.target.value)
-            }}
-            value={tokenId}
-          />
-          {keyValue ? (
-            <p>Current linked IDX DID: {keyValue}</p>
-          ) : (
-            'No Linked IDX DID to this domain!'
-          )}
-          <button type="submit" disabled={loading}>
-            {loading ? 'Linking...' : 'Link Identity to Domain'}
-          </button>
+          <Wrapper>
+            <Content>
+              <h2>Link Identity to Unstoppable Domain</h2>
+              <h5>
+                Linking IDX DID to Unstoppable Domain will allow reviews to be
+                accessed via your crypto domain name.
+              </h5>
+              <input
+                placeholder="Unstoppable Domain Token ID"
+                onChange={e => {
+                  setTokenId(e.target.value)
+                }}
+                value={tokenId}
+              />
+              <h5>
+                {keyValue
+                  ? `Current linked IDX DID: ${keyValue.slice(
+                      0,
+                      10,
+                    )}...${keyValue.slice(
+                      keyValue.length - 4,
+                      keyValue.length,
+                    )}`
+                  : 'No Linked IDX DID to this domain!'}
+              </h5>
+              <button type="submit" disabled={loading}>
+                {loading ? 'Linking...' : 'Link Identity to Domain'}
+              </button>
+            </Content>
+          </Wrapper>
         </form>
       </main>
     </div>

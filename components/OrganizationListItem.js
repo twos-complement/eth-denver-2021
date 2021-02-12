@@ -7,9 +7,12 @@ import Review from './ui/Review'
 import AddReview from './AddReview'
 
 const Wrapper = styled.div`
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.secondary900};
-  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 `
 
@@ -31,9 +34,9 @@ const OrganizationListItem = ({ id }) => {
 
   return (
     <Wrapper>
-      <h3>
+      <h4>
         {organization ? organization.name : `Loading [${id}] from Ceramic...`}
-      </h3>
+      </h4>
       {review && <Review review={review} />}
       {!review && <AddReview organization={id} />}
     </Wrapper>

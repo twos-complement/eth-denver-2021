@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import styled from 'styled-components'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -6,6 +7,28 @@ import IDXContext from '../components/contexts/idx-context'
 import IdentityVerificationsContext from '../components/contexts/identity-verifications-context'
 import OrganizationListItem from '../components/OrganizationListItem'
 import IdentityVerificationListItem from '../components/IdentityVerificationListItem'
+
+const ContentGrid = styled.div`
+  display: grid;
+  grid-row-gap: 20px;
+  padding: 40px 40px 60px 40px;
+`
+
+const OrganizationGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
+`
+
+const Spacer = styled.div`
+  height: 30px;
+`
+
+const IdentityVerificationGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
+`
 
 const Home = () => {
   const [organizations, setOrganizations] = useState([])
@@ -28,32 +51,42 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Welcome to ETHDenver 2021!</h1>
-        <h2>Organizations</h2>
-        <div>
-          {!organizations.length && <h4>Loading Organizations...</h4>}
-          {organizations.map(organization => (
-            <OrganizationListItem key={organization.id} id={organization.id} />
-          ))}
-        </div>
-        <Link href="/my-colorado">
-          <a>Verify Identity with myColorado</a>
-        </Link>
-        <h2>Identity Verifications</h2>
-        <div>
-          {!identityVerifications.length && (
-            <h4>Loading Identity Verifications...</h4>
-          )}
-          {identityVerifications.map(identityVerification => (
-            <IdentityVerificationListItem
-              key={identityVerification.id}
-              id={identityVerification.id}
-            />
-          ))}
-        </div>
-        <Link href="/link-identity-to-unstoppable-domain">
-          <a>Link Identity to Unstoppable Domain</a>
-        </Link>
+        <ContentGrid>
+          <h1>🐶 True Review</h1>
+          <h4>http://truereview.crypto</h4>
+          <Link href="/link-identity-to-unstoppable-domain">
+            <a>Link Identity to Unstoppable Domain</a>
+          </Link>
+          <OrganizationGrid>
+            {!organizations.length && <h4>Loading Organizations...</h4>}
+            {organizations.map(organization => (
+              <OrganizationListItem
+                key={organization.id}
+                id={organization.id}
+              />
+            ))}
+          </OrganizationGrid>
+
+          <Spacer />
+
+          <Link href="/my-colorado">
+            <a>Verify Identity with myColorado</a>
+          </Link>
+          <h3>Identity Verifications</h3>
+          <div>
+            {!identityVerifications.length && (
+              <h4>Loading Identity Verifications...</h4>
+            )}
+            <IdentityVerificationGrid>
+              {identityVerifications.map(identityVerification => (
+                <IdentityVerificationListItem
+                  key={identityVerification.id}
+                  id={identityVerification.id}
+                />
+              ))}
+            </IdentityVerificationGrid>
+          </div>
+        </ContentGrid>
       </main>
     </div>
   )

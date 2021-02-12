@@ -3,12 +3,13 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
 `
 
 const Star = styled.div`
   &:before {
     content: '☆';
-    font-size: 2rem;
+    font-size: 5rem;
     color: ${({ isActive }) => (isActive ? 'orange' : 'gray')};
     cursor: pointer;
   }
