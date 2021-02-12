@@ -48,6 +48,28 @@ Let's check out the experience: [FIGMA PROTOTYPE](https://www.figma.com/proto/0e
 3. User sets `truereview.idx.did` domain record to their IDX DID
 4. User's domain `truereview.idx.did` can now resolve their censorship-resistant reviews ⭐
 
+### NEAR Gamifications Rewards
+
+1. User checks in to an Organization to complete a "quest"
+2. NEAR NFT is minted for reward and assigned to the user's IDX DID
+3. List of each IDX DID's tokens is stored on NEAR contract
+
+## Challenges
+
+#### User-owned data is tough.
+
+We considered 3 layers of decentralized data in the ecosystem:
+
+1. **Base Layer (Blockchain/Ethereum/etc.)** - storing data directly on a fully decentralized blockchain is the purest approach, but can be costly, slow, and difficult to scale
+2. **Middle Layer (Filecoin/etc.)** - a mix of both worlds (1 & 2), blockchain backed monetization powers a more trusted and permanent storage marketplace, must more scalable than directly on Ethereum, but still has atomic transaction costs
+3. **p2p Community (IPFS/Pinata/Ceramic/Textile/TheGraph/etc.)** - a community driven ecosystem, mostly leveraging core IPFS technology to provide a network of peers that help store and share data in a more fluid nature
+
+Each layer has it's pros and cons for specific use cases. For a review platform:
+
+- People paying a cost in order to leave a review isn't realistic
+- People want to interoperate with a variety of wallets, blockchain technology, and social identity verifications
+- People want to own their data, and decide where it is stored
+
 ## Setup
 
 ### Development Environment
