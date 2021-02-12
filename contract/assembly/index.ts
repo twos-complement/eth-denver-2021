@@ -9,6 +9,7 @@ import {
   tokenOwnerIds,
   tokenTypes,
   tokenImages,
+  tokenRegistry,
 } from './model'
 
 // Note that MAX_SUPPLY is implemented here as a simple constant
@@ -153,6 +154,14 @@ export function get_token(token_id: TokenId): MetaData {
   return new MetaData(ownerId, tokenId, tokenType, tokenImage)
 }
 
+export function get_tokens(owner_id: AccountId): string[] {
+  const registry = <string>tokenRegistry.get(owner_id, '')
+
+  return registry == null
+    ? []
+    : registry.split(',').filter((s: string): bool => !!s.length)
+}
+
 export function get_token_ownerId(token_id: TokenId): AccountId {
   const token = get_token(token_id)
 
@@ -192,10 +201,17 @@ export function mint_reward(
     owner_id,
     tokenId,
     type,
-    'https://ipfs.io/ipfs/Qmck1dijajHdjFpRM1UPfcm6PDTp3p69K5fCML8S1Epuj9?filename=Leading-Icon.png',
+    'https://ipfs.io/ipfs/QmV35sqop15ArMXeXLJP3RXyv15ukHGxGPvxK8ULUadr71?filename=doge-beer-reward.png',
   )
 
+  const tokens = get_tokens(owner_id) || []
+  tokens.push(tokenId.toString())
+
+  const registry = tokens.join(',')
+
   storage.set<u64>(TOTAL_SUPPLY, tokenId + 1)
+
+  tokenRegistry.set(owner_id, registry)
 
   // return the tokenId – while typical change methods cannot return data, this
   // is handy for unit tests

@@ -1,3 +1,5 @@
+// @nearfile
+
 import { PersistentMap, storage, context, logging } from 'near-sdk-as'
 
 export type AccountId = string
@@ -26,3 +28,5 @@ export const tokenOwnerIds = new PersistentMap<TokenId, AccountId>('o')
 export const tokenTypes = new PersistentMap<TokenId, TokenType>('t')
 
 export const tokenImages = new PersistentMap<TokenId, IPFSId>('i')
+
+export const tokenRegistry = new PersistentMap<AccountId, string>('r')

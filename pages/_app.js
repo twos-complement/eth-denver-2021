@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 
@@ -5,10 +6,12 @@ import { IDXProvider } from '../components/contexts/idx-context'
 import { ReviewsProvider } from '../components/contexts/reviews-context'
 import { IdentityVerificationsProvider } from '../components/contexts/identity-verifications-context'
 import withIdx from '../components/hoc/withIdx'
+import withNEAR from '../components/hoc/withNEAR'
 import theme from '../util/theme'
 import GlobalStyles from '../components/ui/GlobalStyles'
 
-function MyApp({ Component, pageProps, idx }) {
+function MyApp({ Component, pageProps, idx, ...props }) {
+  
   return (
     <>
       <Head>
@@ -26,7 +29,7 @@ function MyApp({ Component, pageProps, idx }) {
           <ReviewsProvider>
             <IdentityVerificationsProvider>
               <GlobalStyles />
-              <Component {...pageProps} />
+              <Component {...props} {...pageProps} />
             </IdentityVerificationsProvider>
           </ReviewsProvider>
         </IDXProvider>
@@ -35,4 +38,4 @@ function MyApp({ Component, pageProps, idx }) {
   )
 }
 
-export default withIdx(MyApp)
+export default withNEAR(withIdx(MyApp))

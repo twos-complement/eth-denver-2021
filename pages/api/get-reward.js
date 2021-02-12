@@ -9,6 +9,7 @@ const {
 } = nearAPI
 
 export default async (req, res) => {
+  const id = req.query.id
   const contractName = 'dev-1612906641805-6652913'
   const networkId = 'testnet'
   const nodeUrl = 'https://rpc.testnet.near.org'
@@ -47,6 +48,7 @@ export default async (req, res) => {
       'get_token_ownerId',
       'get_token_tokenType',
       'get_token_tokenImage',
+      'get_tokens'
     ],
     changeMethods: [
       'grant_access',
@@ -57,9 +59,13 @@ export default async (req, res) => {
     ],
   })
 
-  const token = await contract.mint_reward({
-    owner_id: 'eth-denver-2021.testnet',
+  const tokenId = await contract.mint_reward({
+    owner_id: id,
   })
+
+  const token = await contract.get_token({ token_id: tokenId })
+
+  console.log(token)
 
   // ed25519:SbQy4MNQwC6PjNUxz6gT6BouVJVwARtthWYpE9QkmrX
 

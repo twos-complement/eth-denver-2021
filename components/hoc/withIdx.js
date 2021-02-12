@@ -9,6 +9,7 @@ import aliases from '../../util/aliases'
 const withIdx = WrappedComponent => {
   const IdxComponent = props => {
     const [idx, setIdx] = useState()
+    const [account, setAccount] = useState({})
 
     useEffect(() => {
       // TODO: upgrade to js-3id-id-provider, and remove 3id-connect:
@@ -31,6 +32,10 @@ const withIdx = WrappedComponent => {
         await ceramic.setDIDProvider(provider)
 
         setIdx(idx)
+
+        const accountId = await idx.getIdentity()
+
+        setAccount({ id: accountId })
       }
 
       setup()
@@ -41,7 +46,7 @@ const withIdx = WrappedComponent => {
     }
 
     return (
-      <WrappedComponent {...props} idx={idx}>
+      <WrappedComponent {...props} idx={idx} account={account}>
         {props.children}
       </WrappedComponent>
     )

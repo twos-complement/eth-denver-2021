@@ -73,10 +73,19 @@ const Home = () => {
 
           <Spacer />
 
-          <Link href="/my-colorado">
-            <a>Verify Identity with myColorado</a>
-          </Link>
+          <h3>Quests</h3>
+          <div>
+            <Link href="/quest">
+              <a>Quest: CDA Fun Finder</a>
+            </Link>
+          </div>
+
           <h3>Identity Verifications</h3>
+          <div>
+            <Link href="/my-colorado">
+              <a>Verify Identity with myColorado</a>
+            </Link>
+          </div>
           <div>
             {!identityVerifications.length && (
               <h4>Loading Identity Verifications...</h4>

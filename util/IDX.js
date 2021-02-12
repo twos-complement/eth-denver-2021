@@ -124,6 +124,10 @@ class IDX {
     return data
   }
 
+  async getIdentity() {
+    return this.aliases.ownerDid
+  }
+
   async verifyIdentity({ docId, signedChallenge, name }) {
     const { kid } = await this.ceramic.did.verifyJWS(signedChallenge)
 
