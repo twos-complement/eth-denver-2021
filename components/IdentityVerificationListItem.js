@@ -20,7 +20,7 @@ const IdentityVerificationListItem = ({ id }) => {
   useEffect(() => {
     async function load() {
       const doc = await idx.loadIdentityVerification(id)
-      setIdentityVerification(doc.state.content)
+      setIdentityVerification(doc.content)
     }
 
     load()
