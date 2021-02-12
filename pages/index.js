@@ -51,6 +51,9 @@ const Home = () => {
             />
           ))}
         </div>
+        <Link href="/link-identity-to-unstoppable-domain">
+          <a>Link Identity to Unstoppable Domain</a>
+        </Link>
       </main>
     </div>
   )
