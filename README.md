@@ -2,6 +2,17 @@
 
 > 🐶 True Review is a censorship-resistant review platform.
 
+![True Review Cover](/public/cover.jpg)
+
+Built by [2C | Two's Complement](https://twoscomplement.io)
+
+Teammates:
+
+- Nico Valencia
+- Katy Jeremko
+- Julian Ramlal
+- Chieri Wada
+
 In the wake of Google censoring over 100,000 reviews from Robinhood's app during the GME event, the online community has made it clear that people demand ownership of their VOICE and their DATA. Reviews belong to the PEOPLE, so let's build it that way.
 
 🐶 True Review is a censorship-resistant review platform. It lets people OWN their reviews, and share them without fear of censorship. We used LOTS of awesome tech from our ETHDenver sponsors this year, integrating these awesome tools in interesting ways.
@@ -14,26 +25,11 @@ Some highlights:
 - People can link their reviews and identity to a **decentralized namespace** with [Unstoppable Domains](https://unstoppabledomains.com/)
 - To make things fun and practical, why not add some gamification using [NEAR Protocol](https://near.org/) **NFT rewards and prizes**!?
 
-Let's check out the experience: [FIGMA PROTOTYPE]
+Let's check out the experience: [FIGMA PROTOTYPE](https://www.figma.com/proto/0eMGJeHltlcCKp4eTqdl5u/2021?node-id=246%3A84301&viewport=879%2C-40%2C0.06251474469900131&scaling=contain&hotspot-hints=0)
 
-## Setup
+## Flows
 
-### Development Environment
-
-- Node.js - [Install Node.js 12](https://nodejs.org/en/), including the npm package management tool. [NVM](https://github.com/nvm-sh/nvm) is recommended.
-
-1. Copy `.env.example` to `.env` and add values below, then source to shell.
-2. `npm run dev` - to run the Next.js app locally
-3. Request `/api/bootstrap` to create and publish schemas and definitions
-4. Request `/api/add-organization` to create an organization and add to State of Colorado IDX Index
-
-### Environment Variables
-
-| Name | Default | Description |
-| ---- | ------- | ----------- |
-| TBD  | TBD     | TBD         |
-
-### Authentication Flow
+### myColorado Identity Verification Flow
 
 1. User accepts myColorado digital ID consent
 2. User requests challenge from API
@@ -43,3 +39,24 @@ Let's check out the experience: [FIGMA PROTOTYPE]
 6. API verifies DID signature on challenge
 7. API uses SoC IDX to update `identityVerification` record with the DID and the person's public info
 8. Dapp reads public verification records to confirm DID ownership
+9. Users can now see state government identity verified reviews ⭐
+
+### Unstoppable Domain IDX DID Link Flow
+
+1. User registers an Unstoppable Domain
+2. User authenticates with IDX
+3. User sets `truereview.idx.did` domain record to their IDX DID
+4. User's domain `truereview.idx.did` can now resolve their censorship-resistant reviews ⭐
+
+## Setup
+
+### Development Environment
+
+True Review is a Dapp on a static Next.js/React stack, using minimal web2 APIs for web3 node interfaces (Infura, Near, IPFS, etc.)
+
+- Node.js - [Install Node.js 12](https://nodejs.org/en/), including the npm package management tool. [NVM](https://github.com/nvm-sh/nvm) is recommended.
+
+1. `npm install`
+2. `npm run dev`
+3. GET `/api/bootstrap` to create and publish schemas and definitions
+4. POST `/api/add-organization` with `{ name: 'Organization Name'}` to create an organization and add to State of Colorado's IDX Index
